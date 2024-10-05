@@ -1,23 +1,23 @@
 
-import { auth } from "@/auth"
 import { FullConversationType } from "@/types"
 import { User } from "@prisma/client"
+import { useSession } from "next-auth/react"
 import { useMemo } from "react"
 
-export const useOtherUser = async (conversation: FullConversationType | { users: User[]}) => {
-  const session = await auth()
+export const useOtherUser = (conversation: FullConversationType | { users: User[]}) => {
+  const session =  useSession()
 
-  if (!session?.user?.email) {
+  if (!session?.data?.user?.email) {
     return null;
   }
 
   const otherUser = useMemo(() => {
-    const currentUserEmail = session?.user?.email;
+    const currentUserEmail = session?.data?.user?.email;
 
     const otherUser = conversation.users.filter((user) => user.email !== currentUserEmail);
 
-    return otherUser[0]
-  }, [conversation.users, session?.user?.email])
+    return otherUser[0];
+  }, [conversation.users, session?.data.user?.email])
   
   return otherUser
 }
