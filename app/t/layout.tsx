@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import Navbar from "@/components/Shared/navbar";
+import Navbar from "@/components/Shared/asideNav";
 import { SessionProvider } from "next-auth/react";
 import { auth } from "@/auth";
+import { redirect } from "next/navigation";
 
 
 
@@ -12,7 +13,9 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const session = await auth()
-
+  if (!session) {
+    return redirect("/authentication/sign-in")
+  }
 
   return (
  

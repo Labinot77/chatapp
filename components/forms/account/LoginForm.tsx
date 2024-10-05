@@ -15,7 +15,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { UserLoginValidation } from "@/lib/validations/UserValidation";
 import AuthButton from "@/components/buttons/AuthButton";
-import { login } from "@/actions/login";
+import { login } from "@/lib/actions/auth/login";
 import { toast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
 

@@ -17,6 +17,13 @@ export const {
 } = NextAuth({
   adapter: PrismaAdapter(db),
   session: { strategy: "jwt" },
+  secret: process.env.NEXTAUTH_SECRET,
+  pages: {
+    error: "/authentication/error",
+    newUser: "/authentication/sign-up",
+    signIn: "/authentication/sign-in",
+    signOut: "/authentication/sign-out",
+  },
   callbacks: {
     async session({session, token}) {
 
@@ -37,6 +44,11 @@ export const {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
     Credentials({
+      name: "credentials",
+      credentials: {
+        email: { label: "Email", type: "email", placeholder: "Email" },
+        password: { label: "Password", type: "password", placeholder: "Password" },
+      },
       async authorize(credentials) {
         const validatedFields = await UserLoginValidation.safeParseAsync(
           credentials
@@ -58,4 +70,5 @@ export const {
       },
     }),
   ],
+  // debug: process.env.NODE_ENV === "development"
 });

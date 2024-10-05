@@ -1,6 +1,6 @@
 "use client";
 
-import { loginSocial } from "@/actions/loginSocial";
+import { loginSocial } from "@/lib/actions/auth/loginSocial";
 import { FaGithub } from "react-icons/fa";
 import { FaGoogle } from 'react-icons/fa'
 

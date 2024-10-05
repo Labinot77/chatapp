@@ -2,7 +2,7 @@
 
 import { CgSpinner } from 'react-icons/cg'
 import { Button } from '../ui/button'
-import { logout } from '@/actions/logout'
+import { logout } from '@/lib/actions/auth/logout'
 import { IoLogOutOutline } from "react-icons/io5";
 
 interface CustomButtonProps {
@@ -15,8 +15,8 @@ interface CustomButtonProps {
 
 export const CustomButton = ({ label, pending, icon, className, onClick }: CustomButtonProps) => {
   return (
-    <Button type='submit' onClick={onClick} className={className}>
-      {pending ? <CgSpinner className="mr-2" /> : label ? <h1>{label}</h1> : icon}
+    <Button disabled={pending} onClick={onClick} type='submit' className={className}>
+      {pending ? <CgSpinner size={18} className="animate-spin" /> : label ? <h1>{label}</h1> : icon}
     </Button>
   )
 }

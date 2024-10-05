@@ -19,6 +19,11 @@ export const login = async (values: z.infer<typeof UserLoginValidation>) => {
     return { error: "Invalid credentials!" };
   }
 
+  if (!user.email) {
+    return { error: "Email not found!" };
+  }
+
+
   try {
     const result = await signIn("credentials", {
       redirect: false, 

@@ -7,7 +7,7 @@ import { z } from "zod";
 import { useRouter } from "next/navigation";
 import { UserRegisterValidation } from "@/lib/validations/UserValidation";
 import { toast } from "@/hooks/use-toast";
-import { register } from "@/actions/register";
+import { register } from "@/lib/actions/auth/register";
 import { Input } from "@/components/ui/input";
 import AuthButton from "@/components/buttons/AuthButton";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";

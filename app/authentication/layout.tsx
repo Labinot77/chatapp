@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import Navbar from "@/components/Shared/navbar";
+import Navbar from "@/components/Shared/asideNav";
 
 
 export default function RootLayout({
@@ -9,7 +9,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-        <main className="h-screen flex max-w-7xl mx-auto text-gray-900 overflow-hidden">
+        <main className="h-screen flex max-w-7xl mx-auto text-primary bg-background overflow-hidden">
         {children}
         </main>
   );

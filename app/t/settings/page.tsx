@@ -2,6 +2,7 @@ import { auth } from '@/auth'
 import { CustomButton } from '@/components/buttons/buttons'
 import SettingsForm from '@/components/forms/account/SettingsForm'
 import { findByEmail, getUserData } from '@/lib/actions/UserActions'
+import { wait } from '@/lib/Miscellaneous'
 import { redirect } from 'next/navigation'
 import React from 'react'
 
@@ -16,6 +17,7 @@ const page = async () => {
       redirect('/authentication/sign-in?callback/Url=/t/settings')
     }
 
+    await wait(6000)
   return (
     <div>
       <SettingsForm 
