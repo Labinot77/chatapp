@@ -1,4 +1,3 @@
-import Sidebar from "@/components/sidebar/Sidebar";
 import { getUsers } from "@/lib/actions/UsersActions";
 import UserList from "./components/UserList";
 import { getCurrentUser } from "@/lib/actions/UserActions";

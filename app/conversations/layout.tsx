@@ -1,4 +1,3 @@
-import Sidebar from "@/components/sidebar/Sidebar";
 import ConversationList from "./components/ConversationList";
 import { getConversations } from "@/lib/actions/conversations/Conversations";
 import { getUsers } from "@/lib/actions/UsersActions";

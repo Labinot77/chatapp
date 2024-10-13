@@ -1,6 +1,3 @@
-import type { Metadata } from "next";
-import localFont from "next/font/local";
-import Navbar from "@/components/Shared/asideNav";
 
 
 export default function RootLayout({

@@ -1,7 +1,6 @@
 "use client"
 
 import { useConversation } from "@/hooks/useConversation";
-import EmptyState from "@/components/EmptyState";
 
 
 const page = () => {
@@ -14,7 +13,7 @@ const page = () => {
         User settings
       </h1>
 
-      
+
     </div>
   )
 }

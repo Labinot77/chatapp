@@ -2,7 +2,6 @@
 
 import Avatar from "@/components/Avatar";
 import LoadingModal from "@/components/LoadingModa";
-import { useRoutes } from "@/hooks/useRoutes";
 import { User } from "@prisma/client";
 import axios from "axios";
 import { useRouter } from "next/navigation";

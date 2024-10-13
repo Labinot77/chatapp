@@ -2,7 +2,6 @@
 
 import { useConversation } from "@/hooks/useConversation";
 import { useRoutes } from "@/hooks/useRoutes";
-import Link from "next/link";
 import MobileItem from "./MobileItem";
 
 

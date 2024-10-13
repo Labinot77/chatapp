@@ -1,8 +1,5 @@
 import { db } from "@/db";
 import { getCurrentUser } from "@/lib/actions/UserActions";
-import { NextResponse } from "next/server";
-
-
 
 export async function POST(req: Request) {
   try {

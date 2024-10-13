@@ -4,7 +4,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -17,7 +16,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { SettingsFormValidation } from "@/lib/validations/UserValidation";
 import { CustomButton } from "@/components/buttons/buttons";
-import { wait } from "@/lib/Miscellaneous";
 import { SaveUserData } from "@/lib/actions/UserActions";
 import { toast } from "@/hooks/use-toast";
 
