@@ -1,16 +1,18 @@
+"use client"
+
 import Link from 'next/link';
-import React from 'react'
 
 interface Props {
   href: string;
   label: string;
   icon: any;
   active?: boolean;
+  onClick?: () => void;
 }
 
-const DesktopItem = ({ href, label, icon: Icon, active }: Props) => {
+const DesktopItem = ({ href, label, icon: Icon, active, onClick }: Props) => {
   return (
-    <li className=''>
+    <li onClick={onClick}>
       <Link 
       href={href} key={href}
       className={`group flex gap-x-3 rounded-md p-3 text-sm leading-6 font-semibold text-gray-500 ${active && 'bg-gray-100 text-black'}`} > 

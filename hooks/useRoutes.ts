@@ -1,11 +1,11 @@
+'use client'
+
 import { usePathname } from "next/navigation"
 import { useConversation } from "./useConversation";
 import { useMemo } from "react";
-import { FaCommentDots, FaUsers, FaCog } from 'react-icons/fa';
-
-
-
-
+import { FaCommentDots, FaUsers, FaCog, FaDoorClosed } from 'react-icons/fa';
+import { signOut } from "@/auth";
+import { logout } from "@/lib/actions/auth/logout";
 
 export const useRoutes = () => {
   const pathname = usePathname();
@@ -14,9 +14,9 @@ export const useRoutes = () => {
   const routes = useMemo(() => [
     {
       label: "Chat",
-      href: '/conversation',
+      href: '/conversations',
       icon: FaCommentDots, 
-      active: pathname === '/conversation' || !!conversationId,
+      active: pathname === '/conversations' || !!conversationId,
     },
     {
       label: "Users",
@@ -27,9 +27,15 @@ export const useRoutes = () => {
     {
       label: "Settings",
       href: '/settings',
-      icon: FaCog ,
+      icon: FaCog,
       active: pathname === '/settings',
     },
+    // {
+    //   label: 'Logout',
+    //   href: "#",
+    //   icon: FaDoorClosed ,
+    //   onClick:() => logout(),
+    // }
   ], [pathname, conversationId]);
 
   return routes;

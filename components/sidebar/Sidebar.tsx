@@ -8,10 +8,10 @@ const Sidebar = async ({children}: {children: React.ReactNode}) => {
 
   return (
 
-    <div className='h-full'>
+    <div className='h-full p-4'>
       <DesktopSidebar currentUser={currentUser!} />
       <MobileFooter />
-        <main className='lg:p-20 h-full'>
+        <main className='lg:pl-20 h-full'>
           {children}
         </main>
     </div>

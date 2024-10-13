@@ -7,7 +7,7 @@ import { User } from "@prisma/client";
 import Avatar from "../Avatar";
 
 interface Props {
-  currentUser: User | null;
+  currentUser?: User;
 }
 
 const DesktopSidebar = ({ currentUser }: Props) => {
@@ -15,11 +15,10 @@ const DesktopSidebar = ({ currentUser }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="hidden lg:fixed lg:inset-y-0 lg:left-0 lg:z-40 lg:w-20 lg:px-6 xl:px-6 lg:overflow-y-auto lg:bg-slate-500 lg:border-r-[1px] lg:pb-4 lg:flex lg:flex-col justify-between">
-      <nav className="mt-4 flex flex-col justify-between">
+    <div className="hidden lg:inset-y-0 lg:z-40 lg:p-2 lg:flex lg:flex-col justify-between bg-[#303030]">
         <ul 
         role="list"
-        className="flex flex-col items-center space-y-1">
+        className="flex w-full justify-between items-center">
           {routes.map((route) => (
             <DesktopItem
             key={route.label}
@@ -27,16 +26,16 @@ const DesktopSidebar = ({ currentUser }: Props) => {
             label={route.label}
             icon={route.icon}
             active={route.active}
+            // onClick={route.onClick}
             />
           ))}
         </ul>
-      </nav>
-      <nav className="mt-4 flex flex-col justify-between items-center">
+      {/* <nav className="mt-4 flex flex-col justify-between items-center">
           <div onClick={() => setIsOpen(!true)} 
           className="cursor-pointer hover:opacity-75 transition">
             <Avatar user={currentUser}/>
           </div>
-      </nav>
+      </nav> */}
     </div>
   )
 }

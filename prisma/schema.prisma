@@ -17,11 +17,12 @@ model User {
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 
-  conversationsIds String[]       @db.ObjectId
-  conversations    Conversation[] @relation(fields: [conversationsIds], references: [id])
 
-  seenMessagesIds String[]  @db.ObjectId
-  seenMessages    Message[] @relation("Seen", fields: [seenMessagesIds], references: [id])
+  conversationIds String[]       @db.ObjectId
+  conversations   Conversation[] @relation(fields: [conversationIds], references: [id])
+
+  seenMessageIds String[]  @db.ObjectId
+  seenMessages   Message[] @relation("Seen", fields: [seenMessageIds], references: [id])
 
   // Optional for WebAuthn support
   Authenticator Authenticator[]
@@ -55,7 +56,7 @@ model Account {
 
 model Conversation {
   id            String   @id @default(auto()) @map("_id") @db.ObjectId
-  createdAt     DateTime @default(now()) // When its accepted
+  createdAt     DateTime @default(now())
   lastMessageAt DateTime @default(now())
   name          String?
   isGroup       Boolean?
@@ -82,7 +83,6 @@ model Message {
   senderId String @db.ObjectId
   sender   User   @relation(fields: [senderId], references: [id], onDelete: Cascade)
 }
-
 model Session {
   id           String   @id @default(auto()) @map("_id") @db.ObjectId
   sessionToken String   @unique

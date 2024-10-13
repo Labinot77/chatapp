@@ -1,18 +1,21 @@
 "use client"
 
-import { User } from "@prisma/client";
 import UserBox from "./UserBox";
+import DesktopSidebar from "@/components/sidebar/DesktopSidebar";
+import MobileFooter from "@/components/sidebar/MobileFooter";
+import { User } from "@prisma/client";
 
 interface Props {
   items: User[];
+  currentUser: User;
 }
 
-const UserList = ({ items }: Props) => {
+const UserList = ({ items, currentUser }: Props) => {
   return (
-    <aside className="fixed inset-y-0 pb-20 lg:pb-0 lg:left-20 lg:w-80 lg:block overflow-y-auto border-r border-gray-200 block w-full left-0">
-      <div className="px-5">
+    <aside className={`fixed w-full lg:m-4 inset-y-0 pb-20 lg:pb-0 lg:left-20 lg:flex lg:flex-col lg:w-80 bg-[#303030]`}>
+      <div className="px-5 overflow-y-auto h-full">
         <div className="flex flex-col">
-          <div className="text-2xl fond-bold text-neutral-800 py-4">
+          <div className="text-2xl text-neutral-100 fond-bold py-4">
             Users
           </div>
         </div>
@@ -23,6 +26,8 @@ const UserList = ({ items }: Props) => {
           />
         ))}
       </div>
+      <DesktopSidebar currentUser={currentUser} />
+      <MobileFooter />
     </aside>
   )
 }

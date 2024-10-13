@@ -8,16 +8,12 @@ export default async function Home() {
   if (!session?.user) {
     redirect('/authentication/sign-up')
   } else {
-    redirect('/t/chat')
+    redirect('/conversations')
   }
-
-
 
   return (
     <main className='p-2 h-full flex flex-col justify-between'>
-    <div>
-      <h1>Main page</h1>
-    </div>
+    <h1></h1>
   </main>
   );
 }
