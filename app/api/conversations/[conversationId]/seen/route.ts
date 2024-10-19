@@ -9,7 +9,7 @@ interface Props {
 }
 
 export async function POST(
-  // request: Request,
+  request: Request,
   { params }: { params: Props }
 ) {
   try {
