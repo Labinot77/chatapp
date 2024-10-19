@@ -4,19 +4,17 @@ import { db } from "@/db";
 import { getCurrentUser } from "@/lib/actions/UserActions";
 import { pusherServer } from "@/lib/pusher";
 
-interface IParams {
+interface Props {
   conversationId?: string;
 }
 
 export async function POST(
-  request: Request,
-  { params }: { params: IParams }
+  // request: Request,
+  { params }: { params: Props }
 ) {
   try {
     const currentUser = await getCurrentUser();
-    const {
-      conversationId
-    } = params;
+    const { conversationId } = params;
 
     
     if (!currentUser?.id || !currentUser?.email) {
