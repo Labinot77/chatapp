@@ -40,7 +40,7 @@ const ConversationList = ({ initialItems, users, currentUser}: Props) => {
       </div>
     </div>
 
-      <div className='overflow-y-auto'>
+      <div className='overflow-y-auto h-full'>
       {items.map((item) => (
         <ConversationBox
           key={item.id}

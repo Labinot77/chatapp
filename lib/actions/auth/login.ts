@@ -38,7 +38,7 @@ export const login = async (values: z.infer<typeof UserLoginValidation>) => {
     return {
       title: "Login Success",
       description: "You are logged in!",
-      redirect: "/conversation",
+      redirect: "/conversations",
     }
     
   } catch (error) {
