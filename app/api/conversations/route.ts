@@ -1,29 +1,27 @@
-import { db } from "@/db";
-import { getCurrentUser } from "@/lib/actions/UserActions";
 
-export async function POST(req: Request) {
+import { db } from "@/db"
+import { getCurrentUser } from "@/lib/actions/UserActions"
+import { pusherServer } from "@/lib/pusher"
+import { NextResponse } from "next/server"
+
+export async function POST(request: Request) {
   try {
-    const currentUser = await getCurrentUser();
-    const body = await req.json();
-    const {
-      userId,
-      isGroup,
-      members,
-      name
-    } = body;
+    const currentUser = await getCurrentUser()
+    const body = await request.json()
+    const { userId, isGroup, members, name } = body
 
-    if (!currentUser?.id || !currentUser.email) {
-      return new Response("Not authorized", { status: 401 });
+    if (!currentUser?.id || !currentUser?.email) {
+      return new NextResponse("Unauthorized", { status: 401 })
     }
 
-    if (isGroup && (!members || members.length < 2 || !name)) {
-      return new Response("Invalid data", { status: 400 });
+    if (isGroup && (!members || members.legth < 2 || !name)) {
+      return new NextResponse("Invalid data", { status: 400 })
     }
 
     if (isGroup) {
       const newConversation = await db.conversation.create({
         data: {
-          name: name,
+          name,
           isGroup,
           users: {
             connect: [
@@ -38,12 +36,16 @@ export async function POST(req: Request) {
         },
         include: {
           users: true,
-        }
-      });
+        },
+      })
 
-      // NOTM INE 
-      // return NextResponse.json(newConversation)
-      return new Response(JSON.stringify(newConversation))
+      newConversation.users.forEach((user) => {
+        if (user.email) {
+          pusherServer.trigger(user.email, "conversation:new", newConversation)
+        }
+      })
+
+      return NextResponse.json(newConversation)
     }
 
     const existingConversations = await db.conversation.findMany({
@@ -52,21 +54,21 @@ export async function POST(req: Request) {
           {
             userIds: {
               equals: [currentUser.id, userId],
-            }
+            },
           },
           {
             userIds: {
-              equals: [userId, currentUser.id]
-            }
-          }
-        ]
-      }
-    });
+              equals: [userId, currentUser.id],
+            },
+          },
+        ],
+      },
+    })
 
-    const singleConversation = existingConversations[0];
+    const singleConversation = existingConversations[0]
 
     if (singleConversation) {
-      return new Response(JSON.stringify(singleConversation))
+      return NextResponse.json(singleConversation)
     }
 
     const newConversation = await db.conversation.create({
@@ -78,19 +80,23 @@ export async function POST(req: Request) {
             },
             {
               id: userId,
-            }
-          ]
-        }
+            },
+          ],
+        },
       },
       include: {
         users: true,
+      },
+    })
+
+    newConversation.users.map((user) => {
+      if (user.email) {
+        pusherServer.trigger(user.email, "conversation:new", newConversation)
       }
-    });
+    })
 
-    return new Response(JSON.stringify(newConversation))
-
-
-  } catch (error) {
-    console.log("Coversations API", error)
+    return NextResponse.json(newConversation)
+  } catch (error: any) {
+    return new NextResponse("Internal Error", { status: 500 })
   }
 }

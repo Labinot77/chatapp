@@ -16,12 +16,12 @@ interface Props {
 const MessageBox = ({ isLast, data }: Props) => {
   const {data: session } = useSession();
   const [imageModalOpen, setImageModalOpen] = useState<boolean>(false)
-  const isOwn = session?.user?.email === data.sender.email;
 
+  const isOwn = session?.user?.email === data?.sender?.email
   const seenList = (data.seen || [])
-  .filter((user) => user.email !== data.sender.id)
-  .map((user) => user.name)
-  .join(', ');
+    .filter((user) => user.email !== data?.sender?.email)
+    .map((user) => user.name)
+    .join(", ")
 
   const container = `flex gap-3 p-4 
   ${isOwn && "justify-end"}`
