@@ -1,6 +1,8 @@
 "use client"
 
+import Button from "@/components/buttons/button";
 import { useConversation } from "@/hooks/useConversation";
+import { logout } from "@/lib/actions/auth/logout";
 
 
 const page = () => {
@@ -13,7 +15,9 @@ const page = () => {
         User settings
       </h1>
 
-
+      <Button onClick={() => logout()}>
+        Log out
+      </Button>
     </div>
   )
 }
